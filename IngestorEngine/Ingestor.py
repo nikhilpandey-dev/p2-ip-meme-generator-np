@@ -6,6 +6,7 @@ from .CSVIngestor import CSVIngestor
 from .PDFIngestor import PDFIngestor
 from QuoteEngine import QuoteModel
 
+
 class Ingestor(IngestorInterface):
     importers = [TextIngestor, DocxIngestor, CSVIngestor, PDFIngestor]
 
