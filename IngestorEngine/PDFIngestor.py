@@ -4,8 +4,6 @@ from QuoteEngine import QuoteModel
 import subprocess
 import os
 import random
-import logging
-import traceback
 
 
 class PDFIngestor(IngestorInterface):
