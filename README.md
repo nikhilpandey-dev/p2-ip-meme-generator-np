@@ -20,5 +20,8 @@ You have been called on to demonstrate your newly learned skills to create a dyn
 
 > As you're building your project, be sure to demonstrate coding best practices for style and documentation. Ensure your code, docstrings, and comments adhere to [PEP 8 Standards](https://www.python.org/dev/peps/pep-0008/).
 
+## Author
+Nikhil Pandey
+
 
 
