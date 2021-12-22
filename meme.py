@@ -18,6 +18,8 @@ def generate_meme(path=None, body=None, author=None):
         imgs = []
         for root, dirs, files in os.walk(images):
             imgs = [os.path.join(root, name) for name in files]
+        
+        print('Image arrays are: ', imgs)
 
         img = random.choice(imgs)
     else:
@@ -48,7 +50,7 @@ if __name__ == "__main__":
     # @TODO Use ArguentParser to parse the following CLI arguments
     parser = argparse.ArgumentParser(description="Putting quote on the image")
     # path - path to an image file
-    img_default = "./_data/photos/dog/xander_1.jpg"
+    img_default = "./_data/photos/dog/"
     parser.add_argument('--path', type=str, default=img_default, help="Picture on which you want to put a quote")
     
     # body - quote body to add to the image
