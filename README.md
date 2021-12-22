@@ -13,6 +13,7 @@ You have been called on to demonstrate your newly learned skills to create a dyn
     - Load, manipulate, and save images.
     - Accept dynamic user input through a command-line tool and a web service. This emulates the kind of work you’ll encounter as a full stack developer.
 
+## Key Learning Highlights
 - This project will give you a hands-on opportunity to practice what you've learned in this course, such as:
     - Object-oriented thinking in Python, including abstract classes, class methods, and static methods.
     - DRY (don’t repeat yourself) principles of class and method design.
