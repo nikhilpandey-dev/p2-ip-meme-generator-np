@@ -47,18 +47,15 @@ def generate_meme(path=None, body=None, author=None):
 
 
 if __name__ == "__main__":
-    # @TODO Use ArguentParser to parse the following CLI arguments
-    parser = argparse.ArgumentParser(description="Putting quote on the image")
-    # path - path to an image file
-    img_default = "./_data/photos/dog/"
-    parser.add_argument('--path', type=str, default=img_default, help="Picture on which you want to put a quote")
-    
-    # body - quote body to add to the image
-    body_default = "Every dog must have his day."
-    parser.add_argument('--body', type=str, default=body_default, help='Please give your quote about the dog')
-    
-    # author - quote author to add to the image
-    author_default = "Unknown"
-    parser.add_argument('--author', type=str, default=author_default, help='Please provide the author name')
+    parser = argparse.ArgumentParser(description="Generates meme and prints their path")
+    parser.add_argument("--path", type=str, default=None,
+                    help="path to an image file")
+    body_default = "Every dog has its day"
+    parser.add_argument("--body", type=str,
+                        default=None,
+                        help="quote body to add to the image")
+    parser.add_argument("--author", type=str,
+                        default=None,
+                        help="quote author to add to the image")
     args = parser.parse_args()
     print(generate_meme(args.path, args.body, args.author))
