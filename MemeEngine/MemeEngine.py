@@ -14,7 +14,7 @@ class MemeEngine:
 
     def make_meme(self, img_path: str, text: str,
                   author: str, width: int = 500) -> str:
-        img: Image = Image.open(img_path)
+        img = Image.open(img_path, mode='r')
         original_width: int
         original_height: int
         original_width, original_height = img.size
