@@ -33,6 +33,7 @@ This project has three modules
 1. Quote Engine Module
 1. Ingestor Module
 1. Meme Engine Module
+1. Exceptions Module
 
 ### Quote Engine Module
 This module includes QuoteModel, the single model class used in the project. The `QuoteModel` takes two parameters `body` and `author` and modifies `__repr__` method to print the model contents as
@@ -53,6 +54,9 @@ All the above modules depend upon an Abstract base class `IngestorInterface` for
 
 This module is responsible for manipulating and drawing text onto images. For this purpose it uses an external library `pillow` to resize images and draw texts over images.
 This class  takes an output directory path as an argument. Its main method is `make_meme`, which creates the meme image and saves it in the provided output directory (it creates the output directory if its not created already), and returns a `string` path to the created meme. This meme path can be used later by the various applications interfaces like CLI or Flask for getting the images with memes and showing to the users.
+
+### Exceptions Module
+This module is there to catch Exceptions like invalid file formats, file types and texts.
 
 ## Using the app
 The app has two interfaces 

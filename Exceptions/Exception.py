@@ -1,6 +1,10 @@
-class InvalidFileFormat(Exception):
-  pass
+class InvalidFileType(Exception):
+    pass
+
+
 class InvalidTextInput(Exception):
-  pass
+    pass
+
+
 class InvalidFilePath(Exception):
-  pass
+    pass

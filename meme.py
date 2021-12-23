@@ -22,7 +22,9 @@ def generate_meme(path=None, body=None, author=None):
 
         img = random.choice(imgs)
     else:
-        # Corrected this mistake as suggested by the reviewer from path[0] to path.
+        """ Corrected this mistake as suggested
+             by the reviewer from path[0] to path.
+        """
         img = path
 
     if body is None:
