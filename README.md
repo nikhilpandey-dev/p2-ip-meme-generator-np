@@ -4,6 +4,8 @@
 ### What the project is
 > This projects is all about building a "meme generator" – a multimedia application to dynamically generate memes, including an image with an overlaid quote.
 
+This project is the second and final project of Udacity's Intermediate Python nanodegree program.
+
 
 ### Project Requirements
 - The project makes us demonstrate the following:
