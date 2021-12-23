@@ -17,7 +17,7 @@ def generate_meme(path=None, body=None, author=None):
         imgs = []
         for root, dirs, files in os.walk(images):
             imgs = [os.path.join(root, name) for name in files]
-        
+
         print('Image arrays are: ', imgs)
 
         img = random.choice(imgs)
@@ -46,9 +46,10 @@ def generate_meme(path=None, body=None, author=None):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Generates meme and prints their path")
+    parser = argparse.ArgumentParser(description=("Generates meme and"
+                                                  "prints their path"))
     parser.add_argument("--path", type=str, default=None,
-                    help="path to an image file")
+                        help="path to an image file")
     body_default = "Every dog has its day"
     parser.add_argument("--body", type=str,
                         default=None,

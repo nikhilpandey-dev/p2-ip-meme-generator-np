@@ -66,24 +66,28 @@ def meme_form():
 def meme_post():
     """ Create a user defined meme """
 
-    # 
     # 1. Use requests to save the image from the image_url
     #    form param to a temp local file.
-    
-    """ 
-    making provision for the backup image url, body and quote, in case I don't get any
+
     """
-    image_url = "http://thecatandthedog.com/wp-content/uploads/2020/11/105992231-1561667465295gettyimages-521697453.jpeg"
-    """ Steaps for getting image data from url and saving it to disk using request
-        1. Get the image url 
+    making provision for the backup image url, body and quote,
+     in case I don't get any
+    """
+    image_url = ("http://thecatandthedog.com/wp-content/uploads/2020/11/"
+                 "105992231-1561667465295gettyimages-521697453.jpeg")
+    """ Steaps for getting image data from url and
+         saving it to disk using request
+        1. Get the image url
         2. Use requests.get to fetch image data
         3. Create a temp file
         4. Write image data in temp file created at step 3
     """
     form_img_url = request.form.get("image_url")
-    backup_img_url = "https://pixabay.com/get/gf773a4e63a85d8a4b513091dfb0707b73e3ffceef4b8982e407e6c11c70652ee7bee8128c04367279233962f774369d7528be9bc0e54e69e8239db53d27a370a_1280.jpg"
+    backup_img_url = ("https://pixabay.com/get/"
+                      "gd1d20cefd6a2bf195717756ffbd7dac76986402fdac93dede9f8"
+                      "c6ea9ceb1fb66bfd8338f80bb5b4821566e43ef914b7_640.jpg")
     image_url = form_img_url if form_img_url else backup_img_url
-   
+
     r = requests.get(image_url, stream=True).content
     flask_temp = f'./static/img-flask-{random.randint(0, 100)}.jpg'
     with open(flask_temp, 'wb') as f:
@@ -97,7 +101,7 @@ def meme_post():
     print('Tmp is: ', flask_temp)
     # 2. Use the meme object to generate a meme using this temp
     #    file and the body and author form paramaters.
-   
+
     backup_quote_body = "Every dog must have his day"
     form_body = request.form.get("body", "")
     body = form_body if form_body else backup_quote_body
