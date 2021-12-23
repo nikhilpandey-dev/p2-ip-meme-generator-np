@@ -2,8 +2,9 @@ import random
 import os
 import requests
 from flask import Flask, render_template, abort, request
+from typing import List
 
-# @TODO Import your Ingestor and MemeEngine classes
+# Import your Ingestor and MemeEngine classes
 from QuoteEngine import QuoteModel
 from IngestorEngine import Ingestor
 from MemeEngine import MemeEngine
@@ -21,15 +22,19 @@ def setup():
                    './_data/DogQuotes/DogQuotesPDF.pdf',
                    './_data/DogQuotes/DogQuotesCSV.csv']
 
-    # TODO: Use the Ingestor class to parse all files in the
+    # Using the Ingestor class to parse all files in the
     # quote_files variable
-    quotes = None
+    quotes: List[QuoteModel] = list()
+    for file in quote_files:
+        quotes.extend(Ingestor.parse(file))
 
     images_path = "./_data/photos/dog/"
 
-    # TODO: Use the pythons standard library os class to find all
+    # Using the pythons standard library os class to find all
     # images within the images images_path directory
-    imgs = None
+    imgs: List[str] = list()
+    for root, dirs, files in os.walk(images_path):
+        imgs = [os.path.join(root, name) for name in files]
 
     return quotes, imgs
 
@@ -41,14 +46,13 @@ quotes, imgs = setup()
 def meme_rand():
     """ Generate a random meme """
 
-    # @TODO:
-    # Use the random python standard library class to:
-    # 1. select a random image from imgs array
-    # 2. select a random quote from the quotes array
+    # Using the random python standard library class to:
 
-    img = None
-    quote = None
-    path = meme.make_meme(img, quote.body, quote.author)
+    # 1. select a random image from imgs array
+    img: str = random.choice(imgs)
+    # 2. select a random quote from the quotes array
+    quote: QuoteModel = random.choice(quotes)
+    path: str = meme.make_meme(img, quote.body, quote.author)
     return render_template('meme.html', path=path)
 
 
@@ -62,14 +66,49 @@ def meme_form():
 def meme_post():
     """ Create a user defined meme """
 
-    # @TODO:
+    # 
     # 1. Use requests to save the image from the image_url
     #    form param to a temp local file.
+    
+    """ 
+    making provision for the backup image url, body and quote, in case I don't get any
+    """
+    image_url = "http://thecatandthedog.com/wp-content/uploads/2020/11/105992231-1561667465295gettyimages-521697453.jpeg"
+    """ Steaps for getting image data from url and saving it to disk using request
+        1. Get the image url 
+        2. Use requests.get to fetch image data
+        3. Create a temp file
+        4. Write image data in temp file created at step 3
+    """
+    form_img_url = request.form.get("image_url")
+    backup_img_url = "https://pixabay.com/get/gf773a4e63a85d8a4b513091dfb0707b73e3ffceef4b8982e407e6c11c70652ee7bee8128c04367279233962f774369d7528be9bc0e54e69e8239db53d27a370a_1280.jpg"
+    image_url = form_img_url if form_img_url else backup_img_url
+   
+    r = requests.get(image_url, stream=True).content
+    flask_temp = f'./static/img-flask-{random.randint(0, 100)}.jpg'
+    with open(flask_temp, 'wb') as f:
+        f.write(r)
+    # else:
+    #     r = requests.get(image_url, stream=True).content
+    #     flask_temp = f'./static/img-flask-{random.randint(0, 100)}.jpg'
+    #     with open(flask_temp, 'wb') as f:
+    #         f.write(r)
+
+    print('Tmp is: ', flask_temp)
     # 2. Use the meme object to generate a meme using this temp
     #    file and the body and author form paramaters.
+   
+    backup_quote_body = "Every dog must have his day"
+    form_body = request.form.get("body", "")
+    body = form_body if form_body else backup_quote_body
+    backup_quote_author = "Unknown"
+    form_author = request.form.get("author", "")
+    author = form_author if form_author else backup_quote_author
+    quote: QuoteModel = QuoteModel(body=body, author=author)
+    path = meme.make_meme(flask_temp, quote.body, quote.author)
+    print(path)
     # 3. Remove the temporary saved image.
-
-    path = None
+    os.remove(flask_temp)
 
     return render_template('meme.html', path=path)
 
