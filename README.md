@@ -80,5 +80,7 @@ The application can be accessed at http://127.0.0.1:5000
 ## Author
 Nikhil Pandey
 
+## Course Completion Certificate
+Completed the course on 24th December, 2021 and here is Udacity's [Intermediate Python Nanodegree Course Completion Certificate](https://github.com/nikhilpandey-dev/p2-ip-meme-generator-np/blob/main/Intermediate_Python_Nanodegree_Completion.pdf).
 
 
